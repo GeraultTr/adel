@@ -491,7 +491,7 @@ def qslim( nb_triangles, points, indexes ):
     write_smf(file_in, points, indexes)
 
     prog = 'qslim'
-    args= ' -t %d -W 2 -O 0 -o %s %s'%(nb_triangles, file_out, file_in)
+    args= ' -t %d -W 2 -O2 0 -o %s %s'%(nb_triangles, file_out, file_in)
 
     sts = os.system(prog+args)
 

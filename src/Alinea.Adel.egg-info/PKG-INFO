@@ -1,0 +1,12 @@
+Metadata-Version: 2.1
+Name: alinea.adel
+Version: 2.0.0
+Summary: 3D plant simulation of graminae crops
+Home-page: https://github.com/openalea-incubator/adel
+Author: Christian Fournier, Christophe Pradal
+Author-email: christian fournier at inrae fr
+License: Cecill-C
+License-File: LICENCE.txt
+License-File: AUTHORS.txt
+
+The Adel package characterise 3D plant development for graminae crops.
