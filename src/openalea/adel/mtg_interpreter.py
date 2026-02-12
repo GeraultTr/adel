@@ -87,7 +87,7 @@ def StemElement_mesh(length, diameter_base, diameter_top, classic=False):
     return mesh
 
 
-def compute_element(element_node, leaves, min_length=0.01, classic=False):
+def compute_element(element_node, leaves, min_length=0.0001, classic=False):
     """compute geometry of Adel base elements (LeafElement and StemElement)
     element_node should be a mtg node proxy"""
     n = element_node
@@ -289,7 +289,7 @@ class AdelVisitor:
         turtle.context.update({"axis": axis})
 
 
-def mtg_interpreter(g, leaves, min_length=0.01, classic=False, face_up=False):
+def mtg_interpreter(g, leaves, min_length=0.0001, classic=False, face_up=False):
     """Compute/update the geometry on each node of the MTG using Turtle geometry."""
     # BUG : sub_mtg mange le vertex plant => on perd la plante !
     # plants = g.component_roots_at_scale(g.root, scale=1)

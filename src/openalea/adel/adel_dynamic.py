@@ -1,6 +1,7 @@
 """Prototype adel model that uses mtg edition functions"""
 
 from openalea.mtg import MTG
+import openalea.plantgl.all as pgl
 from openalea.adel.adel import Adel
 from openalea.adel.mtg_editions import (
     find_metamers,
@@ -132,11 +133,27 @@ class AdelDyn(Adel):
         pos = g.property("position")
         az = g.property("azimuth")
         geom = g.property("geometry")
+
+        # NOTE: Manual fix for first tiller bad positioning
+        first_tiller_correction = True
+        if first_tiller_correction:
+            first_tiller_elements = [] 
+            for v in geom:
+                axis_base = g.Axis(v, Scale=2)[0]
+                if "T1" in str(g.node(axis_base).label):
+                    first_tiller_elements.append(v)
+
         for i, vid in enumerate(g.vertices(1)):
             pos[vid] = self.positions[i]
             az[vid] = self.plant_azimuths[i]
             for gid in g.components_at_scale(vid, g.max_scale()):
                 if gid in geom:
+                    # NOTE: Manual fix for first tiller bad positioning
+                    if first_tiller_correction:
+                        if gid in first_tiller_elements:
+                            geom[gid] = pgl.Translated((0., 0., 0.0285), geom[gid])
+
+                    # Adel classic plant transformation
                     geom[gid] = transform_geom(
                         geom[gid], self.positions[i], self.plant_azimuths[i]
                     )
